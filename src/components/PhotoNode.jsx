@@ -7,7 +7,7 @@ import { useLoader } from "@react-three/fiber";
 import { Billboard } from "@react-three/drei"; // Text removed
 import { motion } from "framer-motion-3d";
 import { TextureLoader, DoubleSide } from "three"; // Added DoubleSide for material
-import { setTargetImage } from "./actions";
+import { setTargetImage } from "../actions.js";
 
 const aspectRatio = 16 / 16;
 const thumbHeight = 16;

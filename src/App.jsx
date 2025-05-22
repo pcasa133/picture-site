@@ -5,9 +5,9 @@
 import React from "react";
 import { useRef } from "react";
 import c from "clsx";
-import PhotoViz from "./PhotoViz";
-import useStore from "./store";
-import Sidebar from "./Sidebar";
+import PhotoViz from "./components/PhotoViz.jsx";
+import useStore from "./store.js";
+import Sidebar from "./components/Sidebar.jsx";
 
 import {
   setLayout,
@@ -15,7 +15,7 @@ import {
   // clearQuery, // Removed
   // setXRayMode, // Removed
   toggleSidebar,
-} from "./actions";
+} from "./actions.js";
 
 export default function App() {
   const layout = useStore.use.layout();

@@ -4,8 +4,8 @@
 */
 import React from "react";
 import c from "clsx";
-import useStore from "./store";
-import { setSidebarOpen, setTargetImage } from "./actions";
+import useStore from "../store.js";
+import { setSidebarOpen, setTargetImage } from "../actions.js";
 
 const truncateDescription = (description, wordLimit = 7) => {
   if (!description) {

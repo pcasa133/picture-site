@@ -7,9 +7,9 @@ import {Canvas, useFrame, useThree} from '@react-three/fiber'
 import {TrackballControls} from '@react-three/drei'
 import {useRef, useState, useEffect} from 'react'
 import {animate} from 'motion'
-import useStore from './store'
-import PhotoNode from './PhotoNode'
-import {setTargetImage} from './actions'
+import useStore from '../store.js'
+import PhotoNode from './PhotoNode.jsx'
+import {setTargetImage} from '../actions.js'
 
 function SceneContent() {
   const images = useStore.use.images()
