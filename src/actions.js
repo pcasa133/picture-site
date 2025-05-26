@@ -97,6 +97,9 @@ export const setTargetImage = async targetImage => {
     state.targetImage = targetImage
     // state.isFetching = !!targetImage; // Removed isFetching logic
     state.highlightNodes = null // Keep this to clear previous highlights
+    if (targetImage === null) {
+      state.resetCam = true; // <-- ADICIONADO: Ativar o reset da câmera ao desmarcar
+    }
   })
 
   if (!targetImage) {

@@ -22,6 +22,7 @@ export default function App() {
   const isSidebarOpen = useStore.use.isSidebarOpen();
   const images = useStore.use.images();
   const targetImage = useStore.use.targetImage();
+  const cameraCurrentZ = useStore.use.cameraCurrentZ();
   console.log("Current targetImage:", targetImage);
   
   const selectedImageDescription = targetImage && images
@@ -54,6 +55,20 @@ export default function App() {
       >
         <span className="icon">list</span>
       </button>
+
+      <div style={{
+        position: 'fixed',
+        bottom: '10px',
+        left: '10px',
+        backgroundColor: 'rgba(0,0,0,0.5)',
+        color: 'white',
+        padding: '5px 10px',
+        borderRadius: '3px',
+        fontSize: '12px',
+        zIndex: 10000
+      }}>
+        Camera Z: {cameraCurrentZ.toFixed(2)}
+      </div>
     </main>
   );
 }

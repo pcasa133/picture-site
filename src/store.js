@@ -22,6 +22,7 @@ export default createSelectorFunctions(
       targetImage: null,
       // caption: null, // Removed
       resetCam: false,
+      cameraCurrentZ: 0,
     }))
   )
 )

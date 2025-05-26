@@ -180,31 +180,74 @@ function SceneContent() {
 
   useEffect(() => {
     const controls = controlsRef.current
-    const targetLayoutPosition = [0, 0, 300] // Default camera position
-    const targetControlsTarget = [0, 0, 0] // Default look-at point
+    // const targetLayoutPosition = [0, 0, 300] // Default camera position - OLD
+    // const targetControlsTarget = [0, 0, 0] // Default look-at point - OLD
     const duration = 0.8
     const ease = 'easeInOut'
 
     if (controls && camera && resetCam) { // Only reset if resetCam is true
+      let dynamicCameraZOffset = 300; // Default Z offset from camera target
+      const groupTargetZ = layout === 'grid' ? 150 : 0; // Target Z for the center of the group of images
+
+      if (nodePositions && images && images.length > 0) {
+        const allNodePosValues = Object.values(nodePositions);
+        if (allNodePosValues.length > 0) {
+          let minX = Infinity, maxX = -Infinity, minY = Infinity, maxY = -Infinity;
+          
+          allNodePosValues.forEach(posArray => {
+            // posArray is [x, y, z] from nodePositions (normalized values, e.g. 0 to 1)
+            // We use the same scaling factor as in PhotoNode for consistency
+            const x = (posArray[0] - 0.5) * 600;
+            const y = (posArray[1] - 0.5) * 600;
+            minX = Math.min(minX, x);
+            maxX = Math.max(maxX, x);
+            minY = Math.min(minY, y);
+            maxY = Math.max(maxY, y);
+          });
+
+          const spreadX = maxX - minX;
+          const spreadY = maxY - minY;
+          // Ensure there's a minimum spread if only one image, based on typical node size
+          const singleNodeVisualSize = 32; // Approx. visual size of a node to prevent over-zooming
+          const maxSpread = Math.max(spreadX, spreadY, images.length === 1 ? singleNodeVisualSize : 0);
+
+          if (maxSpread > 0) {
+            const fovRad = (camera.fov * Math.PI) / 180; // camera.fov is in degrees
+            // Calculate distance to fit (maxSpread / 0.8) in viewport (to make maxSpread occupy 80%)
+            let calculatedDistance = ((maxSpread / 0.8) / 2) / Math.tan(fovRad / 2);
+            calculatedDistance *= 1.15; // Add 15% padding for a bit more room
+            
+            // Clamp the calculated distance to a reasonable range
+            dynamicCameraZOffset = Math.max(150, Math.min(calculatedDistance, 195));
+          } else {
+            // Fallback if no spread or single image with no effective size calculated yet
+            dynamicCameraZOffset = images.length === 1 ? 150 : 195;
+          }
+        }
+      }
+
+      const newCameraTarget = [0, 0, groupTargetZ];
+      const newCameraPosition = [0, 0, groupTargetZ + dynamicCameraZOffset];
+
       const currentCameraTarget = controls.target.clone()
 
       const cameraAndTargetAnimations = [
-        animate(camera.position.x, targetLayoutPosition[0], {
+        animate(camera.position.x, newCameraPosition[0], {
           duration,
           ease,
           onUpdate: latest => (camera.position.x = latest)
         }),
-        animate(camera.position.y, targetLayoutPosition[1], {
+        animate(camera.position.y, newCameraPosition[1], {
           duration,
           ease,
           onUpdate: latest => (camera.position.y = latest)
         }),
-        animate(camera.position.z, targetLayoutPosition[2], {
+        animate(camera.position.z, newCameraPosition[2], {
           duration,
           ease,
           onUpdate: latest => (camera.position.z = latest)
         }),
-        animate(currentCameraTarget.x, targetControlsTarget[0], {
+        animate(currentCameraTarget.x, newCameraTarget[0], {
           duration,
           ease,
           onUpdate: latest => {
@@ -213,7 +256,7 @@ function SceneContent() {
             }
           }
         }),
-        animate(currentCameraTarget.y, targetControlsTarget[1], {
+        animate(currentCameraTarget.y, newCameraTarget[1], {
           duration,
           ease,
           onUpdate: latest => {
@@ -222,7 +265,7 @@ function SceneContent() {
             }
           }
         }),
-        animate(currentCameraTarget.z, targetControlsTarget[2], {
+        animate(currentCameraTarget.z, newCameraTarget[2], {
           duration,
           ease,
           onUpdate: latest => {
@@ -235,8 +278,8 @@ function SceneContent() {
 
       Promise.all(cameraAndTargetAnimations.map(a => a.finished)).then(() => {
         if (controlsRef.current && camera) {
-          camera.position.set(...targetLayoutPosition)
-          controlsRef.current.target.set(...targetControlsTarget)
+          camera.position.set(...newCameraPosition)
+          controlsRef.current.target.set(...newCameraTarget)
         }
       })
     }
@@ -278,9 +321,12 @@ function SceneContent() {
       })
     }
   // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [layout, camera, resetCam]) // Removed controlsRef, groupRef from deps
+  }, [layout, camera, resetCam, images, nodePositions]); // Added images and nodePositions to dependencies
 
   useFrame((_, delta) => {
+    // Atualiza a posição Z da câmera no store
+    useStore.setState({ cameraCurrentZ: camera.position.z });
+
     let currentVelocity = rotationVelocityRef.current
 
     if (isAutoRotating) {
@@ -313,7 +359,7 @@ function SceneContent() {
         onStart={handleInteractionStart}
         onEnd={handleInteractionEnd}
         minDistance={20}
-        maxDistance={1000}
+        maxDistance={195}
         noPan
       />
       <group ref={groupRef}>
@@ -349,7 +395,7 @@ function SceneContent() {
 export default function PhotoViz() {
   return (
     <Canvas
-      camera={{position: [0, 0, 300], near: 0.1, far: 10000}}
+      camera={{position: [0, 0, 195], near: 0.1, far: 10000}}
       onPointerMissed={() => setTargetImage(null)}
     >
       <SceneContent />
