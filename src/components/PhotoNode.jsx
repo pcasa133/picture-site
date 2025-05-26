@@ -9,10 +9,12 @@ import { motion } from "framer-motion-3d";
 import { TextureLoader, DoubleSide } from "three"; // Added DoubleSide for material
 import { setTargetImage } from "../actions.js";
 
+// const localImageBasePath = "../assets/images/"; // <-- ADICIONADO: Caminho base para imagens locais
+const localImageBasePath = "/src/assets/images/"; // <-- ALTERADO: Caminho absoluto a partir da raiz do servidor
+
 const aspectRatio = 16 / 16;
 const thumbHeight = 16;
 const thumbWidth = thumbHeight * aspectRatio;
-const storageRoot = 'https://www.gstatic.com/aistudio/starter-apps/photosphere/'
 
 export default function PhotoNode({
   id,
@@ -25,7 +27,7 @@ export default function PhotoNode({
   // xRayMode, // Removed
   description, // Kept for potential future use, but not displayed in node
 }) {
-  const texture = useLoader(TextureLoader, `${storageRoot}${id}`);
+  const texture = useLoader(TextureLoader, `${localImageBasePath}${id}`);
   // const nodeOpacity = highlight ? 1 : dim ? 0.2 : 0.7; // REMOVIDO
   const nodeOpacity = !selectedImageId || selectedImageId === id ? 1 : 0.2; // <--- NOVA LÓGICA DE OPACIDADE
 
