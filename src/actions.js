@@ -89,9 +89,13 @@ export const setSphereLayout = positions =>
 // Removed setXRayMode function
 
 export const setTargetImage = async targetImage => {
+  console.log('setTargetImage called with:', targetImage); // Debug log
+  
   if (targetImage === get().targetImage) {
     targetImage = null
   }
+
+  console.log('Setting targetImage to:', targetImage); // Debug log
 
   set(state => {
     state.targetImage = targetImage

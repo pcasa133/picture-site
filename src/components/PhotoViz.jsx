@@ -49,6 +49,8 @@ function SceneContent() {
   }
 
   useEffect(() => {
+    console.log('targetImage useEffect triggered:', { targetImage, nodePositions: !!nodePositions, layout, camera: !!camera }); // Debug log
+    
     if (
       targetImage &&
       nodePositions &&
@@ -57,6 +59,8 @@ function SceneContent() {
       controlsRef.current &&
       groupRef.current
     ) {
+      console.log('Starting camera animation for targetImage:', targetImage); // Debug log
+      
       setIsAutoRotating(false)
       clearTimeout(inactivityTimerRef.current)
       rotationVelocityRef.current = 0
@@ -66,6 +70,8 @@ function SceneContent() {
         console.warn(`No node position found for targetImage: ${targetImage}`)
         return
       }
+
+      console.log('Node position found:', nodePos); // Debug log
 
       const nodeLocalX = (nodePos[0] - 0.5) * 600
       const nodeLocalY = (nodePos[1] - 0.5) * 600
@@ -396,7 +402,10 @@ export default function PhotoViz() {
   return (
     <Canvas
       camera={{position: [0, 0, 195], near: 0.1, far: 10000}}
-      onPointerMissed={() => setTargetImage(null)}
+      onPointerMissed={() => {
+        console.log('Canvas onPointerMissed called'); // Debug log
+        setTargetImage(null);
+      }}
     >
       <SceneContent />
     </Canvas>

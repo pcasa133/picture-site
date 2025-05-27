@@ -35,6 +35,7 @@ export default function PhotoNode({
     <motion.group
       onClick={(e) => {
         e.stopPropagation();
+        console.log('PhotoNode clicked:', id); // Debug log
         setTargetImage(id);
       }}
       position={[x, y, z].map((n) => n * 500)} // Kept original scaling factor for consistency
