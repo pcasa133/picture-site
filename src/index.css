@@ -385,7 +385,7 @@ main {
 
   /* Mobile: move canvas up when description panel is visible */
   main:has(.description-panel.visible) canvas {
-    transform: translateY(-60px);
+    transform: translateY(-100px);
     transition: transform 0.4s ease;
   }
 }
@@ -427,7 +427,7 @@ main {
 
   /* Mobile: move canvas up when description panel is visible */
   main:has(.description-panel.visible) canvas {
-    transform: translateY(-80px);
+    transform: translateY(-100px);
     transition: transform 0.4s ease;
   }
 }
@@ -440,7 +440,7 @@ main {
     padding: 16px 20px;
     font-size: 14px;
     line-height: 1.6;
-    max-height: 140px; /* Altura reduzida para mobile */
+    max-height: 220px; /* Aumentado significativamente para evitar scroll */
   }
 }
 
@@ -451,7 +451,7 @@ main {
     padding: 14px 16px;
     font-size: 13px;
     line-height: 1.5;
-    max-height: 120px; /* Altura ainda mais reduzida para mobile pequeno */
+    max-height: 200px; /* Aumentado significativamente para mobile pequeno */
   }
 }
 
