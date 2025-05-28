@@ -40,7 +40,7 @@ export default function PhotoNode({
     
     const animate = () => {
       const elapsed = (Date.now() - startTime) / 1000; // tempo em segundos
-      const cycle = (elapsed % 6) / 6; // ciclo de 6 segundos normalizado (0 a 1) - mais rápido
+      const cycle = (elapsed % 4) / 4; // ciclo de 4 segundos normalizado (0 a 1) - mais rápido ainda
       
       // Usa seno para movimento suave e simétrico
       const sineValue = Math.sin(cycle * Math.PI * 2);
@@ -54,17 +54,17 @@ export default function PhotoNode({
 
   // Calcula o fator de movimento baseado na distância do centro
   const distanceFromCenter = Math.sqrt(x * x + y * y + z * z);
-  const movementFactor = Math.min(distanceFromCenter * 0.08, 0.25); // Aumentei significativamente o movimento
+  const movementFactor = Math.min(distanceFromCenter * 0.12, 0.4); // Aumentei ainda mais o movimento
 
   // Calcula as posições com movimento sutil e simétrico
   const baseX = x * 600;
   const baseY = y * 600;
   const baseZ = z * 600;
 
-  // Movimento baseado no valor do seno (-1 a 1) - aumentei a intensidade
-  const movementX = x * movementFactor * animationValue * 200;
-  const movementY = y * movementFactor * animationValue * 200;
-  const movementZ = z * movementFactor * animationValue * 200;
+  // Movimento baseado no valor do seno (-1 a 1) - aumentei ainda mais a intensidade
+  const movementX = x * movementFactor * animationValue * 300;
+  const movementY = y * movementFactor * animationValue * 300;
+  const movementZ = z * movementFactor * animationValue * 300;
 
   return (
     <motion.group
