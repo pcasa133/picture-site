@@ -44,7 +44,13 @@ export default function PhotoNode({
       
       // Usa seno para movimento suave e simétrico
       const sineValue = Math.sin(cycle * Math.PI * 2);
-      setAnimationValue(sineValue);
+      
+      // Aplica ease-in-out mais suave usando função cúbica
+      const easeInOut = sineValue >= 0 
+        ? Math.pow(sineValue, 0.6) 
+        : -Math.pow(Math.abs(sineValue), 0.6);
+      
+      setAnimationValue(easeInOut);
       
       requestAnimationFrame(animate);
     };
@@ -54,17 +60,17 @@ export default function PhotoNode({
 
   // Calcula o fator de movimento baseado na distância do centro
   const distanceFromCenter = Math.sqrt(x * x + y * y + z * z);
-  const movementFactor = Math.min(distanceFromCenter * 0.12, 0.4); // Aumentei ainda mais o movimento
+  const movementFactor = Math.min(distanceFromCenter * 0.15, 0.6); // Aumentei ainda mais a expansão
 
   // Calcula as posições com movimento sutil e simétrico
   const baseX = x * 600;
   const baseY = y * 600;
   const baseZ = z * 600;
 
-  // Movimento baseado no valor do seno (-1 a 1) - aumentei ainda mais a intensidade
-  const movementX = x * movementFactor * animationValue * 300;
-  const movementY = y * movementFactor * animationValue * 300;
-  const movementZ = z * movementFactor * animationValue * 300;
+  // Movimento baseado no valor do seno (-1 a 1) - expansão máxima
+  const movementX = x * movementFactor * animationValue * 400;
+  const movementY = y * movementFactor * animationValue * 400;
+  const movementZ = z * movementFactor * animationValue * 400;
 
   return (
     <motion.group
