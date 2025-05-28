@@ -19,8 +19,8 @@ export const init = async () => {
     state.didInit = true
   })
 
-  const [sphereLayoutData, umapGridLayoutData] = await Promise.all(
-    ['sphere', 'umap-grid'].map(
+  const [sphereLayoutData, umapGridLayoutData, number6LayoutData] = await Promise.all(
+    ['sphere', 'umap-grid', 'number6-layout'].map(
       path => fetch(`/${path}.json`).then(res => res.json())
     )
   );
@@ -30,7 +30,7 @@ export const init = async () => {
   // Extrai apenas os valores (coordenadas) dos layouts, mantendo a ordem original.
   const spherePositions = Object.values(sphereLayoutData);
   const gridPositions = Object.values(umapGridLayoutData).map(([x, y]) => [x, y / (16 / 9) + 0.25]);
-
+  const number6Positions = Object.values(number6LayoutData);
 
   set(state => {
     state.images = images
@@ -38,6 +38,7 @@ export const init = async () => {
     state.rawLayoutPositions = {
       sphere: spherePositions,
       grid: gridPositions,
+      number6: number6Positions,
     };
     // Inicializa nodePositions com posições padrão, setLayout cuidará da atribuição correta
     state.nodePositions = Object.fromEntries(
@@ -125,5 +126,10 @@ export const setSidebarOpen = isOpen =>
   set(state => {
     state.isSidebarOpen = isOpen
   })
+
+// Nova função para alternar para o layout do número 6
+export const setNumber6Layout = () => {
+  setLayout('number6')
+}
 
 init()

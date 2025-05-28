@@ -23,6 +23,7 @@ export default createSelectorFunctions(
       // caption: null, // Removed
       resetCam: false,
       cameraCurrentZ: 0,
+      isNumber6Mode: false, // Novo estado para controlar o modo número 6
     }))
   )
 )

@@ -193,7 +193,7 @@ function SceneContent() {
 
     if (controls && camera && resetCam) { // Only reset if resetCam is true
       let dynamicCameraZOffset = 300; // Default Z offset from camera target
-      const groupTargetZ = layout === 'grid' ? 150 : 0; // Target Z for the center of the group of images
+      const groupTargetZ = layout === 'grid' ? 150 : layout === 'number6' ? 0 : 0; // Target Z for the center of the group of images
 
       if (nodePositions && images && images.length > 0) {
         const allNodePosValues = Object.values(nodePositions);
@@ -224,10 +224,7 @@ function SceneContent() {
             calculatedDistance *= 1.15; // Add 15% padding for a bit more room
             
             // Clamp the calculated distance to a reasonable range
-            dynamicCameraZOffset = Math.max(150, Math.min(calculatedDistance, 195));
-          } else {
-            // Fallback if no spread or single image with no effective size calculated yet
-            dynamicCameraZOffset = images.length === 1 ? 150 : 195;
+            dynamicCameraZOffset = Math.max(150, Math.min(calculatedDistance, layout === 'number6' ? 400 : 195));
           }
         }
       }
@@ -296,7 +293,7 @@ function SceneContent() {
 
       animate(
         groupRef.current.position.z,
-        layout === 'grid' ? 150 : 0, // Simplified: 'cluster3d' was complex, sphere is 0
+        layout === 'grid' ? 150 : layout === 'number6' ? 0 : 0, // Simplified: 'cluster3d' was complex, sphere is 0
         {
           duration: durationInner,
           ease: easeInner,
@@ -347,6 +344,7 @@ function SceneContent() {
       groupRef.current &&
       Math.abs(currentVelocity) > 0.0001 &&
       layout !== 'grid' && // No auto-rotation for grid layout
+      layout !== 'number6' && // No auto-rotation for number6 layout
       !targetImage // No auto-rotation when an image is targeted
     ) {
       groupRef.current.rotation.y += currentVelocity * delta
