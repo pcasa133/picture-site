@@ -6,6 +6,7 @@ import React from "react";
 import c from "clsx";
 import useStore from "../store.js";
 import { toggleSidebar } from "../actions.js";
+import logoSvg from "../assets/logo.svg";
 
 const Header = () => {
   const isSidebarOpen = useStore.use.isSidebarOpen();
@@ -23,8 +24,11 @@ const Header = () => {
 
         {/* Logo centralizado */}
         <div className="logo-placeholder">
-          <span className="icon">business</span>
-          <span className="company-name">InfinitePay</span>
+          <img 
+            src={logoSvg} 
+            alt="InfinitePay" 
+            className="company-logo"
+          />
         </div>
 
         {/* Botão de lista à direita - ESCONDIDO */}

@@ -289,6 +289,18 @@ main {
   letter-spacing: 0.5px;
 }
 
+.company-logo {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  filter: brightness(1);
+  transition: filter 0.3s ease;
+}
+
+.company-logo:hover {
+  filter: brightness(1.1);
+}
+
 .zoom-indicator {
   background: rgba(255, 255, 255, 0.1);
   color: #fff;
@@ -342,6 +354,10 @@ main {
     font-size: 20px;
   }
   
+  .company-logo {
+    height: 30px;
+  }
+  
   .zoom-indicator {
     font-size: 11px;
     padding: 4px 8px;
@@ -379,6 +395,10 @@ main {
   
   .logo-placeholder .icon {
     font-size: 18px;
+  }
+  
+  .company-logo {
+    height: 26px;
   }
   
   .zoom-indicator {
