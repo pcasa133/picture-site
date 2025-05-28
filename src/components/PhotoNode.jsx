@@ -31,31 +31,40 @@ export default function PhotoNode({
   // const nodeOpacity = highlight ? 1 : dim ? 0.2 : 0.7; // REMOVIDO
   const nodeOpacity = !selectedImageId || selectedImageId === id ? 1 : 0.2; // <--- NOVA LÓGICA DE OPACIDADE
 
-  // Estado para controlar a animação de movimento
-  const [animationPhase, setAnimationPhase] = useState(0);
+  // Estado para controlar a animação de movimento contínuo
+  const [animationValue, setAnimationValue] = useState(0);
 
-  // Efeito para criar movimento contínuo
+  // Efeito para criar movimento contínuo e simétrico
   useEffect(() => {
-    const interval = setInterval(() => {
-      setAnimationPhase(prev => prev === 0 ? 1 : 0);
-    }, 4000); // Muda a cada 4 segundos
-
-    return () => clearInterval(interval);
+    const startTime = Date.now();
+    
+    const animate = () => {
+      const elapsed = (Date.now() - startTime) / 1000; // tempo em segundos
+      const cycle = (elapsed % 8) / 8; // ciclo de 8 segundos normalizado (0 a 1)
+      
+      // Usa seno para movimento suave e simétrico
+      const sineValue = Math.sin(cycle * Math.PI * 2);
+      setAnimationValue(sineValue);
+      
+      requestAnimationFrame(animate);
+    };
+    
+    animate();
   }, []);
 
   // Calcula o fator de movimento baseado na distância do centro
   const distanceFromCenter = Math.sqrt(x * x + y * y + z * z);
-  const movementFactor = Math.min(distanceFromCenter * 0.02, 0.08); // Limita o movimento máximo
+  const movementFactor = Math.min(distanceFromCenter * 0.03, 0.1); // Aumentei um pouco o movimento
 
-  // Calcula as posições com movimento sutil
+  // Calcula as posições com movimento sutil e simétrico
   const baseX = x * 600;
   const baseY = y * 600;
   const baseZ = z * 600;
 
-  // Movimento em direção ao centro (negativo) ou afastando (positivo)
-  const movementX = animationPhase === 0 ? -x * movementFactor * 100 : x * movementFactor * 100;
-  const movementY = animationPhase === 0 ? -y * movementFactor * 100 : y * movementFactor * 100;
-  const movementZ = animationPhase === 0 ? -z * movementFactor * 100 : z * movementFactor * 100;
+  // Movimento baseado no valor do seno (-1 a 1)
+  const movementX = x * movementFactor * animationValue * 80;
+  const movementY = y * movementFactor * animationValue * 80;
+  const movementZ = z * movementFactor * animationValue * 80;
 
   return (
     <motion.group
@@ -70,8 +79,8 @@ export default function PhotoNode({
         y: baseY + movementY,
         z: baseZ + movementZ,
         transition: { 
-          duration: 4, 
-          ease: "easeInOut",
+          duration: 0.1, 
+          ease: "linear",
           type: "tween"
         },
       }}
