@@ -24,7 +24,7 @@ const Header = () => {
         {/* Logo centralizado */}
         <div className="logo-placeholder">
           <span className="icon">business</span>
-          <span className="company-name">InfinityPay</span>
+          <span className="company-name">InfinitePay</span>
         </div>
 
         {/* Botão de lista à direita */}
