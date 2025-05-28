@@ -27,16 +27,16 @@ const Header = () => {
           <span className="company-name">InfinitePay</span>
         </div>
 
-        {/* Botão de lista à direita */}
+        {/* Botão de lista à direita - ESCONDIDO */}
         <div className="header-right">
-          <button
+          {/* <button
             onClick={toggleSidebar}
             className={c("header-list-button", { active: isSidebarOpen })}
             aria-label="Toggle photo list"
             title="Toggle photo list"
           >
             <span className="icon">list</span>
-          </button>
+          </button> */}
         </div>
       </div>
     </header>
