@@ -295,6 +295,10 @@ main {
   object-fit: contain;
   filter: brightness(1);
   transition: filter 0.3s ease;
+  image-rendering: auto;
+  image-rendering: smooth;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }
 
 .company-logo:hover {
