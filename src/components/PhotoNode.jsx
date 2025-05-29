@@ -6,15 +6,15 @@ import React, { useEffect, useState, useMemo } from "react";
 import { useLoader, useFrame } from "@react-three/fiber";
 import { Billboard } from "@react-three/drei"; // Text removed
 import { motion } from "framer-motion-3d";
-import { TextureLoader, DoubleSide } from "three"; // Added DoubleSide for material
+import { TextureLoader, DoubleSide } from "three";
 import { setTargetImage } from "../actions.js";
-
-// const localImageBasePath = "../assets/images/"; // <-- ADICIONADO: Caminho base para imagens locais
-const localImageBasePath = "/src/assets/images/"; // <-- ALTERADO: Caminho absoluto a partir da raiz do servidor
 
 const aspectRatio = 16 / 16;
 const thumbHeight = 16;
 const thumbWidth = thumbHeight * aspectRatio;
+
+// Cache de texturas para evitar recarregamentos
+const textureCache = new Map();
 
 export default function PhotoNode({
   id,
@@ -22,10 +22,7 @@ export default function PhotoNode({
   y = 0,
   z = 0,
   selectedImageId,
-  // highlight, // REMOVIDO
-  // dim, // REMOVIDO
-  // xRayMode, // Removed
-  description, // Kept for potential future use, but not displayed in node
+  description,
 }) {
   const texture = useLoader(TextureLoader, `${localImageBasePath}${id}`);
   // const nodeOpacity = highlight ? 1 : dim ? 0.2 : 0.7; // REMOVIDO
@@ -119,8 +116,6 @@ export default function PhotoNode({
           )}
         </mesh>
       </Billboard>
-
-      {/* Removed Billboard with Text description */}
     </motion.group>
   );
 }
