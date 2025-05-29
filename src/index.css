@@ -185,26 +185,76 @@ main {
   left: 50%;
   width: 90%;
   max-width: 1000px;
-  background: rgba(20, 20, 20, 0.95);
+  background: #18181b; /* Zinc-900 equivalent */
   backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px); /* Safari support */
-  padding: 20px 24px;
-  border-radius: 16px;
-  font-size: 16px;
-  line-height: 1.7;
-  color: #f5f5f5;
+  -webkit-backdrop-filter: blur(20px);
+  padding: 24px;
+  border-radius: 12px;
+  font-size: 14px;
+  line-height: 1.4;
+  color: #e4e4e7; /* Zinc-200 equivalent */
   text-align: left;
   opacity: 0;
-  transform: translateX(-50%) translateY(20px); /* Initial position for transition */
+  transform: translateX(-50%) translateY(20px);
   transition: opacity 0.4s ease, transform 0.4s ease;
   z-index: 200;
-  max-height: 180px; /* Altura máxima aumentada */
-  overflow-y: auto;
+  max-height: none;
+  height: auto;
+  overflow-y: visible;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  font-family: 'Open Sans', 'Google Sans Display', sans-serif;
 }
 
 .description-panel.visible {
   opacity: 1;
   transform: translateX(-50%) translateY(0);
+}
+
+.description-panel-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.description-panel-avatar {
+  width: 32px;
+  height: 32px;
+  background: linear-gradient(135deg, #d946ef, #ef4444, #fb923c);
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.description-panel-client-info {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.description-panel-client-name {
+  color: #e4e4e7; /* Zinc-200 */
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Open Sans', 'Google Sans Display', sans-serif;
+  margin: 0;
+}
+
+.description-panel-client-location {
+  color: #94a3b8; /* Slate-400 */
+  font-size: 14px;
+  font-weight: 700;
+  font-family: 'Open Sans', 'Google Sans Display', sans-serif;
+  margin: 0;
+}
+
+.description-panel-content {
+  color: #e4e4e7; /* Zinc-200 */
+  font-size: 14px;
+  font-weight: 400;
+  font-family: 'Open Sans', 'Google Sans Display', sans-serif;
+  line-height: 1.4;
+  margin: 0;
 }
 
 .description-panel p {
@@ -385,7 +435,7 @@ main {
 
   /* Mobile: move canvas up when description panel is visible */
   main:has(.description-panel.visible) canvas {
-    transform: translateY(-100px);
+    transform: translateY(-80px);
     transition: transform 0.4s ease;
   }
 }
@@ -427,7 +477,7 @@ main {
 
   /* Mobile: move canvas up when description panel is visible */
   main:has(.description-panel.visible) canvas {
-    transform: translateY(-100px);
+    transform: translateY(-80px);
     transition: transform 0.4s ease;
   }
 }
@@ -435,23 +485,72 @@ main {
 /* Description panel responsive adjustments */
 @media (max-width: 768px) {
   .description-panel {
-    width: 95%;
-    bottom: 10px;
-    padding: 16px 20px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    transform: translateX(0) translateY(20px);
+    padding: 20px;
     font-size: 14px;
-    line-height: 1.6;
-    max-height: 220px; /* Aumentado significativamente para evitar scroll */
+    line-height: 1.4;
+    max-height: none;
+    height: auto;
+    gap: 12px;
+    border-radius: 16px 16px 0 0;
+    overflow-y: visible;
+  }
+  
+  .description-panel.visible {
+    transform: translateX(0) translateY(0);
+  }
+  
+  .description-panel-client-name,
+  .description-panel-client-location {
+    font-size: 13px;
+  }
+  
+  .description-panel-content {
+    font-size: 13px;
+    line-height: 1.4;
+    white-space: normal;
+    overflow: visible;
   }
 }
 
 @media (max-width: 480px) {
   .description-panel {
-    width: 95%;
-    bottom: 8px;
-    padding: 14px 16px;
+    width: 100%;
+    bottom: 0;
+    left: 0;
+    transform: translateX(0) translateY(20px);
+    padding: 16px;
     font-size: 13px;
-    line-height: 1.5;
-    max-height: 200px; /* Aumentado significativamente para mobile pequeno */
+    line-height: 1.4;
+    max-height: none;
+    height: auto;
+    gap: 10px;
+    border-radius: 12px 12px 0 0;
+    overflow-y: visible;
+  }
+  
+  .description-panel.visible {
+    transform: translateX(0) translateY(0);
+  }
+  
+  .description-panel-avatar {
+    width: 28px;
+    height: 28px;
+  }
+  
+  .description-panel-client-name,
+  .description-panel-client-location {
+    font-size: 12px;
+  }
+  
+  .description-panel-content {
+    font-size: 12px;
+    line-height: 1.4;
+    white-space: normal;
+    overflow: visible;
   }
 }
 

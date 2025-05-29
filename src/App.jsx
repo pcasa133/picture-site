@@ -41,7 +41,14 @@ export default function App() {
         
         {selectedImageDescription && (
           <div className={c("description-panel", { visible: !!selectedImageDescription })}>
-            <p>{selectedImageDescription}</p>
+            <div className="description-panel-header">
+              <div className="description-panel-avatar"></div>
+              <div className="description-panel-client-info">
+                <div className="description-panel-client-name">Nome do cliente</div>
+                <div className="description-panel-client-location">cidade</div>
+              </div>
+            </div>
+            <div className="description-panel-content">{selectedImageDescription}</div>
           </div>
         )}
 
