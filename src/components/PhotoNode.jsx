@@ -2,19 +2,19 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
-import React, { useEffect, useState } from "react";
-import { useLoader } from "@react-three/fiber";
-import { Billboard } from "@react-three/drei"; // Text removed
+import React, { useEffect, useState, useRef } from "react";
+import { useFrame } from "@react-three/fiber";
+import { Billboard } from "@react-three/drei";
 import { motion } from "framer-motion-3d";
-import { TextureLoader, DoubleSide } from "three"; // Added DoubleSide for material
+import { TextureLoader, DoubleSide } from "three";
 import { setTargetImage } from "../actions.js";
-
-// const localImageBasePath = "../assets/images/"; // <-- ADICIONADO: Caminho base para imagens locais
-const localImageBasePath = "/src/assets/images/"; // <-- ALTERADO: Caminho absoluto a partir da raiz do servidor
 
 const aspectRatio = 16 / 16;
 const thumbHeight = 16;
 const thumbWidth = thumbHeight * aspectRatio;
+
+// Cache de texturas para evitar recarregamentos
+const textureCache = new Map();
 
 export default function PhotoNode({
   id,
@@ -22,101 +22,91 @@ export default function PhotoNode({
   y = 0,
   z = 0,
   selectedImageId,
-  // highlight, // REMOVIDO
-  // dim, // REMOVIDO
-  // xRayMode, // Removed
-  description, // Kept for potential future use, but not displayed in node
+  description,
 }) {
-  const texture = useLoader(TextureLoader, `${localImageBasePath}${id}`);
-  // const nodeOpacity = highlight ? 1 : dim ? 0.2 : 0.7; // REMOVIDO
-  const nodeOpacity = !selectedImageId || selectedImageId === id ? 1 : 0.2; // <--- NOVA LÓGICA DE OPACIDADE
+  const [texture, setTexture] = useState(null);
+  const [isLoading, setIsLoading] = useState(true);
+  const meshRef = useRef();
+  
+  const nodeOpacity = !selectedImageId || selectedImageId === id ? 1 : 0.2;
 
-  // Estado para controlar a animação de movimento contínuo
-  const [animationValue, setAnimationValue] = useState(0);
-
-  // Efeito para criar movimento contínuo e simétrico
+  // Carregamento lazy da textura
   useEffect(() => {
-    const startTime = Date.now();
+    const imagePath = `/src/assets/images/${id}`;
     
-    const animate = () => {
-      const elapsed = (Date.now() - startTime) / 1000; // tempo em segundos
-      const cycle = (elapsed % 4) / 4; // ciclo de 4 segundos normalizado (0 a 1) - mais rápido ainda
-      
-      // Usa seno para movimento suave e simétrico
-      const sineValue = Math.sin(cycle * Math.PI * 2);
-      
-      // Aplica ease-in-out mais suave usando função cúbica
-      const easeInOut = sineValue >= 0 
-        ? Math.pow(sineValue, 0.6) 
-        : -Math.pow(Math.abs(sineValue), 0.6);
-      
-      setAnimationValue(easeInOut);
-      
-      requestAnimationFrame(animate);
-    };
+    // Verifica se a textura já está no cache
+    if (textureCache.has(id)) {
+      setTexture(textureCache.get(id));
+      setIsLoading(false);
+      return;
+    }
+
+    const loader = new TextureLoader();
     
-    animate();
-  }, []);
+    loader.load(
+      imagePath,
+      (loadedTexture) => {
+        // Salva no cache
+        textureCache.set(id, loadedTexture);
+        setTexture(loadedTexture);
+        setIsLoading(false);
+      },
+      undefined,
+      (error) => {
+        console.error(`Failed to load texture for ${id}:`, error);
+        setIsLoading(false);
+      }
+    );
+  }, [id]);
 
-  // Calcula o fator de movimento baseado na distância do centro
-  const distanceFromCenter = Math.sqrt(x * x + y * y + z * z);
-  const movementFactor = Math.min(distanceFromCenter * 0.15, 0.6); // Aumentei ainda mais a expansão
-
-  // Calcula as posições com movimento sutil e simétrico
-  const baseX = x * 600;
-  const baseY = y * 600;
-  const baseZ = z * 600;
-
-  // Movimento baseado no valor do seno (-1 a 1) - expansão máxima
-  const movementX = x * movementFactor * animationValue * 400;
-  const movementY = y * movementFactor * animationValue * 400;
-  const movementZ = z * movementFactor * animationValue * 400;
+  // Animação suave de opacidade
+  useFrame((state, delta) => {
+    if (meshRef.current && meshRef.current.material) {
+      const targetOpacity = isLoading ? 0 : nodeOpacity;
+      const currentOpacity = meshRef.current.material.opacity;
+      
+      // Lerp suave para opacidade
+      const newOpacity = currentOpacity + (targetOpacity - currentOpacity) * delta * 3;
+      meshRef.current.material.opacity = newOpacity;
+    }
+  });
 
   return (
     <motion.group
       onClick={(e) => {
         e.stopPropagation();
-        console.log('PhotoNode clicked:', id); // Debug log
+        console.log('PhotoNode clicked:', id);
         setTargetImage(id);
       }}
-      position={[x, y, z].map((n) => n * 500)} // Kept original scaling factor for consistency
-      animate={{
-        x: baseX + movementX,
-        y: baseY + movementY,
-        z: baseZ + movementZ,
-        transition: { 
-          duration: 0.1, 
-          ease: "linear",
-          type: "tween"
-        },
+      position={[x * 500, y * 500, z * 500]}
+      initial={{ scale: 0 }}
+      animate={{ scale: 1 }}
+      whileHover={{ scale: 1.1 }}
+      transition={{ 
+        scale: { duration: 0.3, ease: "easeOut" },
+        layout: { duration: 0.3, ease: "easeInOut" }
       }}
     >
       <Billboard>
-        <mesh scale={[thumbWidth, thumbHeight, 1]}>
+        <mesh ref={meshRef} scale={[thumbWidth, thumbHeight, 1]}>
           <planeGeometry />
           {texture ? (
-            <motion.meshStandardMaterial
+            <meshStandardMaterial
               map={texture}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: nodeOpacity }}
-              transition={{ duration: 0.5 }}
-              transparent={nodeOpacity < 1.0}
-              side={DoubleSide} // Ensures texture is visible if camera goes behind
+              transparent={true}
+              opacity={isLoading ? 0 : nodeOpacity}
+              side={DoubleSide}
             />
           ) : (
-            <motion.meshStandardMaterial
-              color="red"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: nodeOpacity }}
-              transition={{ duration: 0.5 }}
-              transparent={nodeOpacity < 1.0}
+            <meshStandardMaterial
+              color={isLoading ? "gray" : "red"}
+              transparent={true}
+              opacity={isLoading ? 0.3 : nodeOpacity}
               side={DoubleSide}
             />
           )}
         </mesh>
       </Billboard>
-
-      {/* Removed Billboard with Text description */}
     </motion.group>
   );
 }
