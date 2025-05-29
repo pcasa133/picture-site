@@ -184,15 +184,16 @@ main {
   bottom: 15px;
   left: 50%;
   width: 90%;
-  max-width: 1000px;
-  background: #18181b; /* Zinc-900 equivalent */
+  max-width: 910px;
+  background: rgba(0, 0, 0, 0.3);
   backdrop-filter: blur(20px);
   -webkit-backdrop-filter: blur(20px);
-  padding: 24px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  padding: 26px;
   border-radius: 12px;
-  font-size: 14px;
+  font-size: 13px;
   line-height: 1.4;
-  color: #e4e4e7; /* Zinc-200 equivalent */
+  color: #e4e4e7;
   text-align: left;
   opacity: 0;
   transform: translateX(-50%) translateY(20px);
@@ -203,8 +204,9 @@ main {
   overflow-y: visible;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 16px;
   font-family: 'Open Sans', 'Google Sans Display', sans-serif;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
 }
 
 .description-panel.visible {
@@ -235,15 +237,15 @@ main {
 .description-panel-client-name {
   color: #e4e4e7; /* Zinc-200 */
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 500; /* Reduzido de 700 para 500 (menos bold) */
   font-family: 'Open Sans', 'Google Sans Display', sans-serif;
   margin: 0;
 }
 
 .description-panel-client-location {
-  color: #94a3b8; /* Slate-400 */
+  color: #a1a1aa; /* Zinc-400 - removido o azul, agora cinza neutro */
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 400; /* Reduzido de 700 para 400 (normal) */
   font-family: 'Open Sans', 'Google Sans Display', sans-serif;
   margin: 0;
 }
@@ -251,7 +253,7 @@ main {
 .description-panel-content {
   color: #e4e4e7; /* Zinc-200 */
   font-size: 14px;
-  font-weight: 400;
+  font-weight: 400; /* Mantém normal */
   font-family: 'Open Sans', 'Google Sans Display', sans-serif;
   line-height: 1.4;
   margin: 0;
@@ -363,6 +365,81 @@ main {
   }
   50% {
     filter: drop-shadow(0 0 20px #00ff88) drop-shadow(0 0 30px #00ff88);
+  }
+}
+
+/* Modo 1 - Azul Elétrico */
+.company-logo.mode1 {
+  filter: drop-shadow(0 0 12px #00a8ff);
+  animation: pulse-glow-blue 2.5s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-blue {
+  0%, 100% {
+    filter: drop-shadow(0 0 12px #00a8ff);
+  }
+  50% {
+    filter: drop-shadow(0 0 25px #00a8ff) drop-shadow(0 0 35px #0078ff);
+  }
+}
+
+/* Modo 2 - Roxo Neon */
+.company-logo.mode2 {
+  filter: drop-shadow(0 0 14px #8b5cf6);
+  animation: pulse-glow-purple 2.2s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-purple {
+  0%, 100% {
+    filter: drop-shadow(0 0 14px #8b5cf6);
+  }
+  50% {
+    filter: drop-shadow(0 0 28px #8b5cf6) drop-shadow(0 0 40px #a855f7);
+  }
+}
+
+/* Modo 3 - Rosa Vibrante */
+.company-logo.mode3 {
+  filter: drop-shadow(0 0 16px #ec4899);
+  animation: pulse-glow-pink 1.8s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-pink {
+  0%, 100% {
+    filter: drop-shadow(0 0 16px #ec4899);
+  }
+  50% {
+    filter: drop-shadow(0 0 32px #ec4899) drop-shadow(0 0 45px #f472b6);
+  }
+}
+
+/* Modo 4 - Laranja Ardente */
+.company-logo.mode4 {
+  filter: drop-shadow(0 0 18px #f97316);
+  animation: pulse-glow-orange 2.8s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-orange {
+  0%, 100% {
+    filter: drop-shadow(0 0 18px #f97316);
+  }
+  50% {
+    filter: drop-shadow(0 0 36px #f97316) drop-shadow(0 0 50px #fb923c);
+  }
+}
+
+/* Modo 5 - Ciano Gelado */
+.company-logo.mode5 {
+  filter: drop-shadow(0 0 20px #06b6d4);
+  animation: pulse-glow-cyan 2.1s ease-in-out infinite;
+}
+
+@keyframes pulse-glow-cyan {
+  0%, 100% {
+    filter: drop-shadow(0 0 20px #06b6d4);
+  }
+  50% {
+    filter: drop-shadow(0 0 40px #06b6d4) drop-shadow(0 0 55px #22d3ee);
   }
 }
 
@@ -555,3 +632,110 @@ main {
 }
 
 /* Old sidebarButton media queries removed - button now in header */
+
+/* Simple Loader - apenas rodinha sutil */
+.simple-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: #000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+}
+
+.simple-spinner {
+  width: 40px;
+  height: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-left: 3px solid #666;
+  border-radius: 50%;
+  animation: simple-spin 1s linear infinite;
+}
+
+@keyframes simple-spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+/* Fade in sutil para as imagens */
+@keyframes fadeIn {
+  0% { 
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  100% { 
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Global Loader Styles */
+.global-loader {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.95);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 9999;
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.loader-content {
+  text-align: center;
+  color: white;
+  max-width: 400px;
+  padding: 40px;
+}
+
+.loader-spinner {
+  width: 60px;
+  height: 60px;
+  border: 4px solid rgba(255, 255, 255, 0.1);
+  border-left: 4px solid #00ff88;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+  margin: 0 auto 20px;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+.loader-content h2 {
+  font-family: "Google Sans Display", sans-serif;
+  font-size: 24px;
+  margin-bottom: 20px;
+  font-weight: 600;
+}
+
+.progress-bar {
+  width: 100%;
+  height: 6px;
+  background: rgba(255, 255, 255, 0.2);
+  border-radius: 3px;
+  overflow: hidden;
+  margin: 20px 0;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #00ff88, #00cc70);
+  border-radius: 3px;
+  transition: width 0.3s ease;
+}
+
+.loader-content p {
+  font-size: 16px;
+  color: rgba(255, 255, 255, 0.8);
+  margin-top: 10px;
+}

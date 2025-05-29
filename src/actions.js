@@ -19,8 +19,8 @@ export const init = async () => {
     state.didInit = true
   })
 
-  const [sphereLayoutData, umapGridLayoutData, number6LayoutData] = await Promise.all(
-    ['sphere', 'umap-grid', 'number6-layout'].map(
+  const [sphereLayoutData, umapGridLayoutData, number6LayoutData, layout1Data, layout2Data, layout3Data, layout4Data, layout5Data] = await Promise.all(
+    ['sphere', 'umap-grid', 'number6-layout', 'layout1', 'layout2', 'layout3', 'layout4', 'layout5'].map(
       path => fetch(`/${path}.json`).then(res => res.json())
     )
   );
@@ -31,6 +31,11 @@ export const init = async () => {
   const spherePositions = Object.values(sphereLayoutData);
   const gridPositions = Object.values(umapGridLayoutData).map(([x, y]) => [x, y / (16 / 9) + 0.25]);
   const number6Positions = Object.values(number6LayoutData);
+  const layout1Positions = Object.values(layout1Data);
+  const layout2Positions = Object.values(layout2Data);
+  const layout3Positions = Object.values(layout3Data);
+  const layout4Positions = Object.values(layout4Data);
+  const layout5Positions = Object.values(layout5Data);
 
   set(state => {
     state.images = images
@@ -39,6 +44,11 @@ export const init = async () => {
       sphere: spherePositions,
       grid: gridPositions,
       number6: number6Positions,
+      layout1: layout1Positions,
+      layout2: layout2Positions,
+      layout3: layout3Positions,
+      layout4: layout4Positions,
+      layout5: layout5Positions,
     };
     // Inicializa nodePositions com posições padrão, setLayout cuidará da atribuição correta
     state.nodePositions = Object.fromEntries(
@@ -130,6 +140,51 @@ export const setSidebarOpen = isOpen =>
 // Nova função para alternar para o layout do número 6
 export const setNumber6Layout = () => {
   setLayout('number6')
+}
+
+// Nova função para fazer o ciclo entre os modos
+export const cycleModes = () => {
+  const state = get()
+  const currentMode = state.currentMode
+  
+  // Ciclo: 0 (normal) -> 1 -> 2 -> 3 -> 4 -> 5 -> 6 (number6) -> 0 (volta ao normal)
+  const nextMode = (currentMode + 1) % 7
+  
+  set(state => {
+    state.currentMode = nextMode
+    if (nextMode === 6) {
+      state.isNumber6Mode = true
+    } else {
+      state.isNumber6Mode = false
+    }
+  })
+  
+  // Define o layout baseado no modo
+  switch (nextMode) {
+    case 0:
+      setLayout('sphere')
+      break
+    case 1:
+      setLayout('layout1')
+      break
+    case 2:
+      setLayout('layout2')
+      break
+    case 3:
+      setLayout('layout3')
+      break
+    case 4:
+      setLayout('layout4')
+      break
+    case 5:
+      setLayout('layout5')
+      break
+    case 6:
+      setLayout('number6')
+      break
+    default:
+      setLayout('sphere')
+  }
 }
 
 init()

@@ -24,6 +24,7 @@ export default createSelectorFunctions(
       resetCam: false,
       cameraCurrentZ: 0,
       isNumber6Mode: false, // Novo estado para controlar o modo número 6
+      currentMode: 0, // 0=normal, 1-5=layouts especiais, 6=número6
     }))
   )
 )

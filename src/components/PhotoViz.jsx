@@ -345,6 +345,11 @@ function SceneContent() {
       Math.abs(currentVelocity) > 0.0001 &&
       layout !== 'grid' && // No auto-rotation for grid layout
       layout !== 'number6' && // No auto-rotation for number6 layout
+      layout !== 'layout1' && // No auto-rotation for layout1
+      layout !== 'layout2' && // No auto-rotation for layout2
+      layout !== 'layout3' && // No auto-rotation for layout3
+      layout !== 'layout4' && // No auto-rotation for layout4
+      layout !== 'layout5' && // No auto-rotation for layout5
       !targetImage // No auto-rotation when an image is targeted
     ) {
       groupRef.current.rotation.y += currentVelocity * delta
@@ -398,14 +403,20 @@ function SceneContent() {
 
 export default function PhotoViz() {
   return (
-    <Canvas
-      camera={{position: [0, 0, 195], near: 0.1, far: 10000}}
-      onPointerMissed={() => {
-        console.log('Canvas onPointerMissed called'); // Debug log
-        setTargetImage(null);
-      }}
-    >
-      <SceneContent />
-    </Canvas>
+    <div style={{ 
+      animation: 'fadeIn 1s ease-out',
+      width: '100%',
+      height: '100%'
+    }}>
+      <Canvas
+        camera={{position: [0, 0, 195], near: 0.1, far: 10000}}
+        onPointerMissed={() => {
+          console.log('Canvas onPointerMissed called'); // Debug log
+          setTargetImage(null);
+        }}
+      >
+        <SceneContent />
+      </Canvas>
+    </div>
   )
 }

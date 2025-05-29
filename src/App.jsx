@@ -2,12 +2,14 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
-import React from "react";
+import React, { Suspense } from "react";
 import c from "clsx";
 import PhotoViz from "./components/PhotoViz.jsx";
 import useStore from "./store.js";
 import Sidebar from "./components/Sidebar.jsx";
 import Header from "./components/Header.jsx";
+import SimpleLoader from "./components/SimpleLoader.jsx";
+import PerformanceMonitor from "./components/PerformanceMonitor.jsx";
 
 import {
   setLayout,
@@ -34,9 +36,12 @@ export default function App() {
 
   return (
     <>
+      <PerformanceMonitor />
       <Header />
       <main>
-        <PhotoViz />
+        <Suspense fallback={<SimpleLoader />}>
+          <PhotoViz />
+        </Suspense>
         <Sidebar />
         
         {selectedImageDescription && (

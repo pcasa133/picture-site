@@ -2,8 +2,8 @@
  * @license
  * SPDX-License-Identifier: Apache-2.0
 */
-import React, { useEffect, useState } from "react";
-import { useLoader } from "@react-three/fiber";
+import React, { useEffect, useState, useMemo } from "react";
+import { useLoader, useFrame } from "@react-three/fiber";
 import { Billboard } from "@react-three/drei"; // Text removed
 import { motion } from "framer-motion-3d";
 import { TextureLoader, DoubleSide } from "three"; // Added DoubleSide for material
@@ -29,86 +29,90 @@ export default function PhotoNode({
 }) {
   const texture = useLoader(TextureLoader, `${localImageBasePath}${id}`);
   // const nodeOpacity = highlight ? 1 : dim ? 0.2 : 0.7; // REMOVIDO
-  const nodeOpacity = !selectedImageId || selectedImageId === id ? 1 : 0.2; // <--- NOVA LÓGICA DE OPACIDADE
+  const nodeOpacity = !selectedImageId || selectedImageId === id ? 1 : 0.1; // <--- Reduzido de 0.2 para 0.1 (mais sutil)
 
-  // Estado para controlar a animação de movimento contínuo
+  // Usa useFrame em vez de requestAnimationFrame para melhor performance
   const [animationValue, setAnimationValue] = useState(0);
-
-  // Efeito para criar movimento contínuo e simétrico
-  useEffect(() => {
-    const startTime = Date.now();
+  
+  // Throttle da animação para otimizar performance
+  let frameCounter = 0;
+  
+  useFrame((state) => {
+    // Atualiza animação apenas a cada 2 frames (30fps em vez de 60fps para animação)
+    frameCounter++;
+    if (frameCounter % 2 !== 0) return;
     
-    const animate = () => {
-      const elapsed = (Date.now() - startTime) / 1000; // tempo em segundos
-      const cycle = (elapsed % 4) / 4; // ciclo de 4 segundos normalizado (0 a 1) - mais rápido ainda
-      
-      // Usa seno para movimento suave e simétrico
-      const sineValue = Math.sin(cycle * Math.PI * 2);
-      
-      // Aplica ease-in-out mais suave usando função cúbica
-      const easeInOut = sineValue >= 0 
-        ? Math.pow(sineValue, 0.6) 
-        : -Math.pow(Math.abs(sineValue), 0.6);
-      
-      setAnimationValue(easeInOut);
-      
-      requestAnimationFrame(animate);
-    };
+    // Usa o clock do Three.js que é mais otimizado
+    const elapsed = state.clock.elapsedTime;
+    const cycle = (elapsed % 8) / 8; // ciclo de 8 segundos
     
-    animate();
-  }, []);
+    // Simplifica cálculo - remove Math.pow para melhor performance
+    const sineValue = Math.sin(cycle * Math.PI * 2);
+    const easeInOut = sineValue * 0.8; // Simplificado, sem Math.pow
+    
+    setAnimationValue(easeInOut);
+  });
 
-  // Calcula o fator de movimento baseado na distância do centro
-  const distanceFromCenter = Math.sqrt(x * x + y * y + z * z);
-  const movementFactor = Math.min(distanceFromCenter * 0.15, 0.6); // Aumentei ainda mais a expansão
+  // Memoiza cálculos pesados para evitar recalcular a cada render
+  const movementFactors = useMemo(() => {
+    const distanceFromCenter = Math.sqrt(x * x + y * y + z * z);
+    let movementFactor = Math.min(distanceFromCenter * 0.3, 1.2);
 
-  // Calcula as posições com movimento sutil e simétrico
-  const baseX = x * 600;
-  const baseY = y * 600;
-  const baseZ = z * 600;
+    const isMobile = window.innerWidth <= 768;
+    const isInFocus = selectedImageId === id;
+    
+    if (isInFocus) {
+      movementFactor *= isMobile ? 0.15 : 0.3;
+    }
 
-  // Movimento baseado no valor do seno (-1 a 1) - expansão máxima
-  const movementX = x * movementFactor * animationValue * 400;
-  const movementY = y * movementFactor * animationValue * 400;
-  const movementZ = z * movementFactor * animationValue * 400;
+    let movementMultiplier = 800;
+    if (isInFocus) {
+      movementMultiplier *= isMobile ? 0.2 : 0.4;
+    }
+
+    const baseX = x * 600;
+    const baseY = y * 600;
+    const baseZ = z * 600;
+
+    return { movementFactor, movementMultiplier, baseX, baseY, baseZ };
+  }, [x, y, z, selectedImageId, id]);
+
+  const movementX = x * movementFactors.movementFactor * animationValue * movementFactors.movementMultiplier;
+  const movementY = y * movementFactors.movementFactor * animationValue * movementFactors.movementMultiplier;
+  const movementZ = z * movementFactors.movementFactor * animationValue * movementFactors.movementMultiplier;
 
   return (
     <motion.group
       onClick={(e) => {
         e.stopPropagation();
-        console.log('PhotoNode clicked:', id); // Debug log
         setTargetImage(id);
       }}
       position={[x, y, z].map((n) => n * 500)} // Kept original scaling factor for consistency
       animate={{
-        x: baseX + movementX,
-        y: baseY + movementY,
-        z: baseZ + movementZ,
-        transition: { 
-          duration: 0.1, 
-          ease: "linear",
-          type: "tween"
-        },
+        x: movementFactors.baseX + movementX,
+        y: movementFactors.baseY + movementY,
+        z: movementFactors.baseZ + movementZ,
+      }}
+      transition={{ 
+        duration: 0.1, 
+        ease: "linear",
+        type: "tween"
       }}
     >
       <Billboard>
         <mesh scale={[thumbWidth, thumbHeight, 1]}>
           <planeGeometry />
           {texture ? (
-            <motion.meshStandardMaterial
+            <meshStandardMaterial
               map={texture}
-              initial={{ opacity: 0 }}
-              animate={{ opacity: nodeOpacity }}
-              transition={{ duration: 0.5 }}
+              opacity={nodeOpacity}
               transparent={nodeOpacity < 1.0}
-              side={DoubleSide} // Ensures texture is visible if camera goes behind
+              side={DoubleSide}
             />
           ) : (
-            <motion.meshStandardMaterial
+            <meshStandardMaterial
               color="red"
-              initial={{ opacity: 0 }}
-              animate={{ opacity: nodeOpacity }}
-              transition={{ duration: 0.5 }}
+              opacity={nodeOpacity}
               transparent={nodeOpacity < 1.0}
               side={DoubleSide}
             />
