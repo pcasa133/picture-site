@@ -177,12 +177,13 @@ main {
   height: 100vh;
   overflow: hidden;
   padding-top: 60px; /* Altura do header */
+  position: relative;
 }
 
-/* Garante que o canvas 3D fique abaixo do header */
+/* Garante que o canvas 3D fique acima do fundo animado mas abaixo do header */
 main canvas {
   position: relative;
-  z-index: 1;
+  z-index: 10;
 }
 
 .description-panel {

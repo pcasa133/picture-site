@@ -11,6 +11,7 @@ import Header from "./components/Header.jsx";
 import SimpleLoader from "./components/SimpleLoader.jsx";
 import PerformanceMonitor from "./components/PerformanceMonitor.jsx";
 import AnimatedAvatar from './components/AnimatedAvatar.jsx';
+import UnicornBackground from './components/UnicornBackground.jsx';
 import testimonialsData from './data/testimonials.json';
 
 import {
@@ -54,6 +55,7 @@ export default function App() {
 
   return (
     <>
+      <UnicornBackground />
       <PerformanceMonitor />
       <Header />
       <main>
