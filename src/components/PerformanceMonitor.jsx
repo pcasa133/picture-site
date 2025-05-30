@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { useThree } from '@react-three/fiber';
 
 const PerformanceMonitor = () => {
   const [fps, setFps] = useState(0);
@@ -10,9 +9,6 @@ const PerformanceMonitor = () => {
   
   const frameCountRef = useRef(0);
   const lastTimeRef = useRef(performance.now());
-  
-  // Hook do Three.js para acessar o renderer
-  const { gl } = useThree();
 
   useEffect(() => {
     let animationId;
@@ -55,32 +51,42 @@ const PerformanceMonitor = () => {
     };
     
     const updateWebGLInfo = () => {
-      if (!gl) return;
-      
       const info = {};
-      const renderer = gl;
       
-      // Informações do renderer Three.js
-      if (renderer.info) {
-        info.geometries = renderer.info.memory.geometries;
-        info.textures = renderer.info.memory.textures;
-        info.drawCalls = renderer.info.render.calls;
-        info.triangles = renderer.info.render.triangles;
-        info.points = renderer.info.render.points;
+      try {
+        // Criar um contexto WebGL temporário para obter informações
+        const canvas = document.createElement('canvas');
+        const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
+        
+        if (gl) {
+          // Extensões WebGL para informações do renderer
+          const debugInfo = gl.getExtension('WEBGL_debug_renderer_info');
+          if (debugInfo) {
+            info.renderer = gl.getParameter(debugInfo.UNMASKED_RENDERER_WEBGL);
+            info.vendor = gl.getParameter(debugInfo.UNMASKED_VENDOR_WEBGL);
+          }
+          
+          // Informações de contexto WebGL
+          info.maxTextures = gl.getParameter(gl.MAX_TEXTURE_IMAGE_UNITS);
+          info.maxTextureSize = gl.getParameter(gl.MAX_TEXTURE_SIZE);
+          info.maxViewport = gl.getParameter(gl.MAX_VIEWPORT_DIMS);
+          info.webglVersion = gl.getParameter(gl.VERSION);
+          info.shadingLanguageVersion = gl.getParameter(gl.SHADING_LANGUAGE_VERSION);
+          
+          // Limpeza
+          canvas.remove();
+        }
+        
+        // Tentar acessar informações do Three.js se disponível globalmente
+        if (window.__THREE_DEVTOOLS__) {
+          const rendererInfo = window.__THREE_DEVTOOLS__.renderer;
+          if (rendererInfo) {
+            info.threeRenderer = rendererInfo;
+          }
+        }
+      } catch (error) {
+        console.warn('Could not get WebGL info:', error);
       }
-      
-      // Extensões WebGL para memória de vídeo
-      const ext = renderer.getContext().getExtension('WEBGL_debug_renderer_info');
-      if (ext) {
-        info.renderer = renderer.getContext().getParameter(ext.UNMASKED_RENDERER_WEBGL);
-        info.vendor = renderer.getContext().getParameter(ext.UNMASKED_VENDOR_WEBGL);
-      }
-      
-      // Informações de contexto WebGL
-      const context = renderer.getContext();
-      info.maxTextures = context.getParameter(context.MAX_TEXTURE_IMAGE_UNITS);
-      info.maxTextureSize = context.getParameter(context.MAX_TEXTURE_SIZE);
-      info.maxViewport = context.getParameter(context.MAX_VIEWPORT_DIMS);
       
       setWebglInfo(info);
     };
@@ -107,7 +113,7 @@ const PerformanceMonitor = () => {
         cancelAnimationFrame(animationId);
       }
     };
-  }, [gl]);
+  }, []);
 
   const getPerformanceColor = () => {
     if (fps >= 50) return '#00ff88'; // Verde - Ótimo
@@ -149,9 +155,9 @@ const PerformanceMonitor = () => {
         </div>
       )}
       
-      {webglInfo.textures !== undefined && (
+      {webglInfo.maxTextureSize && (
         <div style={{ color: '#ff6600', fontSize: '10px' }}>
-          GPU: {webglInfo.textures}tex {webglInfo.geometries}geo
+          GPU: {webglInfo.maxTextureSize}px max
         </div>
       )}
       
@@ -187,11 +193,10 @@ const PerformanceMonitor = () => {
           
           <div style={{ marginBottom: '8px' }}>
             <div style={{ color: '#ff6600', fontWeight: 'bold' }}>🎮 WebGL:</div>
-            {webglInfo.drawCalls !== undefined && <div>Draw Calls: {webglInfo.drawCalls}</div>}
-            {webglInfo.triangles !== undefined && <div>Triangles: {webglInfo.triangles.toLocaleString()}</div>}
-            {webglInfo.textures !== undefined && <div>Textures: {webglInfo.textures}</div>}
-            {webglInfo.geometries !== undefined && <div>Geometries: {webglInfo.geometries}</div>}
+            {webglInfo.renderer && <div>GPU: {webglInfo.renderer.substring(0, 40)}...</div>}
             {webglInfo.maxTextureSize && <div>Max Texture: {webglInfo.maxTextureSize}px</div>}
+            {webglInfo.maxTextures && <div>Max Texture Units: {webglInfo.maxTextures}</div>}
+            {webglInfo.webglVersion && <div>WebGL: {webglInfo.webglVersion.substring(0, 25)}...</div>}
           </div>
           
           <div>
