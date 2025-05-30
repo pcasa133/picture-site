@@ -10,7 +10,7 @@ import Sidebar from "./components/Sidebar.jsx";
 import Header from "./components/Header.jsx";
 import SimpleLoader from "./components/SimpleLoader.jsx";
 import PerformanceMonitor from "./components/PerformanceMonitor.jsx";
-import UnicornBackground from './components/UnicornBackground.jsx';
+// import UnicornBackground from './components/UnicornBackground.jsx'; // REMOVED - High memory usage
 import testimonialsData from './data/testimonials.json';
 
 import {
@@ -54,7 +54,7 @@ export default function App() {
 
   return (
     <>
-      <UnicornBackground />
+      {/* <UnicornBackground /> REMOVED - High memory usage */}
       <PerformanceMonitor />
       <Header />
       <main>

@@ -10,6 +10,7 @@ import {animate} from 'motion'
 import useStore from '../store.js'
 import PhotoNode from './PhotoNode.jsx'
 import {setTargetImage} from '../actions.js'
+import { isMobile, getMobileImageLimit } from '../utils/mobileOptimizations.js'
 
 function SceneContent() {
   const images = useStore.use.images()
@@ -25,6 +26,9 @@ function SceneContent() {
   const [isAutoRotating, setIsAutoRotating] = useState(false) // Auto-rotation logic retained
   const inactivityTimerRef = useRef(null)
   const rotationVelocityRef = useRef(0)
+
+  // Mobile detection for controls
+  const isOnMobile = isMobile();
 
   const cameraDistance = 25
   const targetSpeed = 0.1 
@@ -367,41 +371,48 @@ function SceneContent() {
         ref={controlsRef}
         onStart={handleInteractionStart}
         onEnd={handleInteractionEnd}
-        minDistance={20}
-        maxDistance={195}
+        minDistance={isOnMobile ? 50 : 20}
+        maxDistance={isOnMobile ? 400 : 195}
         noPan
       />
       <group ref={groupRef}>
-        {images?.map(image => {
-          // const isHighlighted = highlightNodes?.includes(image.id) // highlightNodes will be null // REMOVIDO
+        {(() => {
+          const imageLimit = getMobileImageLimit();
+          console.log('PhotoViz render - imageLimit:', imageLimit, 'total images:', images?.length);
+          
+          return images?.map((image, index) => {
+            // Mobile optimization: render fewer images for better performance
+            if (index >= imageLimit) {
+              console.log('Skipping image at index:', index, 'due to limit:', imageLimit);
+              return null;
+            }
 
-          return (
-            <PhotoNode
-              key={image.id}
-              id={image.id}
-              description={image.description}
-              x={nodePositions?.[image.id][0] - 0.5}
-              y={nodePositions?.[image.id][1] - 0.5}
-              z={(nodePositions?.[image.id][2] || 0) - 0.5}
-              selectedImageId={targetImage} // <--- ADICIONADO: Passar targetImage
-              // highlight={ // REMOVIDO
-              //   // (highlightNodes && isHighlighted) || // This part will be false as highlightNodes is null
-              //   (targetImage && targetImage === image.id)
-              // }
-              // dim={ // REMOVIDO
-              //   // (highlightNodes && !isHighlighted) || // This part will be false
-              //   (targetImage && targetImage !== image.id)
-              // }
-              // xRayMode={xRayMode} // Removed
-            />
-          )
-        })}
+            console.log('Rendering image at index:', index, 'id:', image.id);
+            return (
+              <PhotoNode
+                key={image.id}
+                id={image.id}
+                description={image.description}
+                x={nodePositions?.[image.id][0] - 0.5}
+                y={nodePositions?.[image.id][1] - 0.5}
+                z={(nodePositions?.[image.id][2] || 0) - 0.5}
+                selectedImageId={targetImage}
+              />
+            )
+          });
+        })()}
       </group>
     </>
   )
 }
 
 export default function PhotoViz() {
+  const isOnMobile = isMobile();
+  console.log('PhotoViz - isOnMobile:', isOnMobile);
+  
+  // Adjust camera distance for mobile to give more space to the sphere
+  const cameraDistance = isOnMobile ? 250 : 195;
+  
   return (
     <div style={{ 
       animation: 'fadeIn 1s ease-out',
@@ -409,9 +420,9 @@ export default function PhotoViz() {
       height: '100%'
     }}>
       <Canvas
-        camera={{position: [0, 0, 195], near: 0.1, far: 10000}}
+        camera={{position: [0, 0, cameraDistance], near: 0.1, far: 10000}}
         onPointerMissed={() => {
-          console.log('Canvas onPointerMissed called'); // Debug log
+          console.log('Canvas onPointerMissed called');
           setTargetImage(null);
         }}
       >
