@@ -1,0 +1,362 @@
+[
+  {
+    "id": "photo_01.jpg",
+    "nome": "Maria Santos",
+    "cidade": "São Paulo, SP",
+    "depoimento": "Quando descobri a InfinitePay, minha vida mudou completamente! Hoje faturo mais de R$ 120 mil por mês e tenho acesso à menor taxa do mercado. Sem surpresa. Sem letra miúda. Tudo claro desde o começo. As taxas acompanham o tamanho do meu negócio e diminuem conforme eu cresço. Antes eu pagava 4,5% em outras maquininhas, hoje pago menos de 1,8%! Consegui expandir minha loja, contratar 3 funcionários e ainda sobra dinheiro para investir. A transparência da InfinitePay é algo que nunca vi em lugar nenhum."
+  },
+  {
+    "id": "photo_02.jpg",
+    "nome": "João Silva",
+    "cidade": "Rio de Janeiro, RJ",
+    "depoimento": "Ainda não cheguei nos R$ 80 mil mensais, mas mesmo assim tenho acesso ao Pix gratuito, as melhores taxas e recebimento rápido do meu dinheiro! Faturava R$ 35 mil e estava desesperado com as taxas abusivas dos bancos tradicionais. Com a InfinitePay, economizo mais de R$ 800 por mês só em taxas! Esse dinheiro que sobra eu reinvisto no negócio. Já comprei equipamentos novos, melhorei meu estoque e estou crescendo 15% ao mês. O sonho dos R$ 80 mil está cada vez mais próximo!"
+  },
+  {
+    "id": "photo_03.jpg",
+    "nome": "Ana Costa",
+    "cidade": "Belo Horizonte, MG",
+    "depoimento": "A InfinitePay revolucionou meu negócio! Comecei faturando R$ 25 mil, hoje já passo dos R$ 90 mil mensais. As taxas diminuem conforme você cresce - isso é genial! Quando estava começando, pagava 2,8%, agora pago apenas 1,5%. Sem pegadinhas, sem taxas escondidas. Tudo transparente desde o primeiro dia. Com o dinheiro que economizo em taxas, consegui abrir uma segunda loja e contratar mais vendedores. Minha família toda trabalha comigo agora e nossa qualidade de vida melhorou 1000%!"
+  },
+  {
+    "id": "photo_04.jpg",
+    "nome": "Roberto Oliveira",
+    "cidade": "Porto Alegre, RS",
+    "depoimento": "Sou vendedor há 20 anos e nunca vi nada igual à InfinitePay! Mesmo faturando R$ 45 mil por mês, tenho Pix gratuito e recebo meu dinheiro na hora. Antes esperava 30 dias para receber, agora é instantâneo! Isso mudou completamente meu fluxo de caixa. Posso comprar mercadoria à vista e negociar melhores preços com fornecedores. Já consegui aumentar minha margem de lucro em 25% só por causa disso. A meta agora é chegar nos R$ 80 mil para ter acesso às menores taxas do mercado!"
+  },
+  {
+    "id": "photo_05.jpg",
+    "nome": "Carla Mendes",
+    "cidade": "Brasília, DF",
+    "depoimento": "A transparência da InfinitePay me conquistou desde o primeiro dia! Eles explicaram que as taxas acompanham o tamanho do negócio e diminuem conforme você cresce. Sem letra miúda, sem surpresas desagradáveis. Comecei com R$ 60 mil mensais pagando 2,2%, hoje faturo R$ 95 mil e pago apenas 1,6%. O app mostra tudo em tempo real: vendas, taxas, projeções. Consegui organizar minhas finanças como nunca antes. Já comprei minha casa própria e estou planejando expandir para outras cidades!"
+  },
+  {
+    "id": "photo_06.jpg",
+    "nome": "Pedro Almeida",
+    "cidade": "Salvador, BA",
+    "depoimento": "Mesmo ainda não tendo chegado nos R$ 80 mil mensais, a InfinitePay já transformou minha realidade! Faturo R$ 52 mil e tenho acesso ao Pix gratuito e recebimento rápido. Antes perdia vendas porque não aceitava Pix, agora é meu meio de pagamento favorito! Zero taxa, dinheiro na conta na hora. Meus clientes adoram e eu também. Já consegui quitar todas as dívidas do cartão de crédito e estou montando uma reserva de emergência. O próximo passo é chegar nos R$ 80 mil para ter as menores taxas!"
+  },
+  {
+    "id": "photo_07.jpg",
+    "nome": "Marcos Ferreira",
+    "cidade": "Curitiba, PR",
+    "depoimento": "A InfinitePay me deu a liberdade financeira que eu sempre sonhei! Hoje faturo R$ 110 mil mensais e pago a menor taxa do mercado. Sem pegadinhas, sem taxas escondidas. Tudo claro desde o começo, exatamente como eles prometeram. As taxas realmente diminuem conforme você cresce - é incrível ver isso acontecendo na prática! Com o dinheiro que economizo, consegui diversificar meus investimentos, comprar um apartamento para alugar e ainda sobra para viajar com a família. Minha vida mudou completamente!"
+  },
+  {
+    "id": "photo_08.jpg",
+    "nome": "Luciana Torres",
+    "cidade": "Fortaleza, CE",
+    "depoimento": "Ainda estou crescendo para chegar nos R$ 80 mil, mas já sinto os benefícios da InfinitePay todos os dias! Faturo R$ 38 mil e tenho Pix gratuito, as melhores taxas do mercado e recebimento instantâneo. Isso fez toda a diferença no meu fluxo de caixa. Antes ficava no vermelho esperando o dinheiro cair, agora posso reinvestir imediatamente. Já aumentei meu estoque em 40% e estou atendendo muito mais clientes. A meta é clara: chegar nos R$ 80 mil para ter acesso às menores taxas e crescer ainda mais!"
+  },
+  {
+    "id": "photo_09.jpg",
+    "nome": "Maria",
+    "cidade": "Recife, PE",
+    "depoimento": "Antes da InfinitePay, eu perdia pelo menos 30% das vendas por não aceitar cartão. Agora aceito qualquer forma de pagamento e minhas vendas triplicaram em 6 meses!"
+  },
+  {
+    "id": "photo_10.jpg",
+    "nome": "João",
+    "cidade": "Goiânia, GO",
+    "depoimento": "A InfinitePay mudou minha vida! Consegui organizar minhas finanças e hoje tenho uma reserva de emergência pela primeira vez. O app me ajuda a controlar cada centavo."
+  },
+  {
+    "id": "photo_11.jpg",
+    "nome": "Ana",
+    "cidade": "Manaus, AM",
+    "depoimento": "Sou vendedora há 15 anos e nunca vi algo tão prático. Recebo na hora, sem taxa abusiva. Já consegui comprar minha moto própria para as entregas!"
+  },
+  {
+    "id": "photo_12.jpg",
+    "nome": "Carlos",
+    "cidade": "Belém, PA",
+    "depoimento": "Com a InfinitePay, meus clientes pagam como querem: PIX, cartão, dinheiro. Não perco mais nenhuma venda e meu faturamento aumentou 150% este ano."
+  },
+  {
+    "id": "photo_13.jpg",
+    "nome": "Juliana",
+    "cidade": "Vitória, ES",
+    "depoimento": "A InfinitePay me deu liberdade! Não dependo mais de banco, não tenho conta bloqueada. Recebo meu dinheiro na hora e uso como quiser."
+  },
+  {
+    "id": "photo_14.jpg",
+    "nome": "Eduardo",
+    "cidade": "Campo Grande, MS",
+    "depoimento": "Meus clientes adoram a praticidade da InfinitePay. Pagam como preferem e eu recebo garantido. Minha reputação como vendedora melhorou muito!"
+  },
+  {
+    "id": "photo_15.jpg",
+    "nome": "Carla",
+    "cidade": "João Pessoa, PB",
+    "depoimento": "Antes eu tinha vergonha de não aceitar cartão. Hoje com a InfinitePay, ofereço todas as opções e meus clientes me respeitam mais como profissional."
+  },
+  {
+    "id": "photo_16.jpg",
+    "nome": "Rafael",
+    "cidade": "Teresina, PI",
+    "depoimento": "A InfinitePay me ensinou a separar o dinheiro do negócio do pessoal. Hoje tenho uma reserva para emergências e outra para investir no crescimento das vendas."
+  },
+  {
+    "id": "photo_17.jpg",
+    "nome": "Patrícia",
+    "cidade": "Aracaju, SE",
+    "depoimento": "Consegui sair da informalidade graças à InfinitePay. Hoje tenho CNPJ, aceito todos os pagamentos e meu negócio está crescendo de forma sustentável."
+  },
+  {
+    "id": "photo_18.jpg",
+    "nome": "Gustavo",
+    "cidade": "Maceió, AL",
+    "depoimento": "A InfinitePay me deu confiança para aumentar meus preços. Sei que vou receber, sei que é seguro. Minha margem de lucro melhorou significativamente."
+  },
+  {
+    "id": "photo_19.jpg",
+    "nome": "Silvia",
+    "cidade": "Natal, RN",
+    "depoimento": "Minha família toda usa InfinitePay agora. Conseguimos organizar as finanças de casa e do negócio. Estamos mais unidos e prósperos!"
+  },
+  {
+    "id": "photo_20.jpg",
+    "nome": "Thiago",
+    "cidade": "Cuiabá, MT",
+    "depoimento": "Com a InfinitePay, consigo atender mais clientes por dia. O pagamento é rápido, não trava, não dá erro. Minha produtividade aumentou muito!"
+  },
+  {
+    "id": "photo_21.jpg",
+    "nome": "Mônica",
+    "cidade": "Florianópolis, SC",
+    "depoimento": "A InfinitePay me deu dignidade como vendedora. Hoje ofereço um serviço completo, profissional. Meus clientes me veem como uma empresária de verdade."
+  },
+  {
+    "id": "photo_22.jpg",
+    "nome": "Rodrigo",
+    "cidade": "São Luís, MA",
+    "depoimento": "Nunca pensei que seria possível ter estabilidade financeira sendo vendedor autônomo. A InfinitePay me provou que é possível sim!"
+  },
+  {
+    "id": "photo_23.jpg",
+    "nome": "Beatriz",
+    "cidade": "Boa Vista, RR",
+    "depoimento": "A InfinitePay me ajudou a realizar o sonho da casa própria. Com o controle financeiro que aprendi, consegui juntar a entrada em 2 anos!"
+  },
+  {
+    "id": "photo_24.jpg",
+    "nome": "José",
+    "cidade": "Rio Branco, AC",
+    "depoimento": "Meus filhos estão orgulhosos de mim. Com a InfinitePay, consegui dar estabilidade para a família e ainda investir na educação deles."
+  },
+  {
+    "id": "photo_25.jpg",
+    "nome": "Amanda",
+    "cidade": "Palmas, TO",
+    "depoimento": "A InfinitePay transformou minha mentalidade sobre dinheiro. Hoje penso como empresária, planejo o futuro e tenho metas claras de crescimento."
+  },
+  {
+    "id": "photo_26.jpg",
+    "nome": "Fábio",
+    "cidade": "Campinas, SP",
+    "depoimento": "Com a InfinitePay, consegui expandir meu negócio. Hoje tenho 3 pontos de venda e todos usam a mesma plataforma. Controlo tudo pelo celular!"
+  },
+  {
+    "id": "photo_27.jpg",
+    "nome": "Cristina",
+    "cidade": "Santos, SP",
+    "depoimento": "A InfinitePay me deu segurança para investir em estoque. Sei que vou vender, sei que vou receber. Meu giro aumentou e o lucro também!"
+  },
+  {
+    "id": "photo_28.jpg",
+    "nome": "Márcio",
+    "cidade": "Niterói, RJ",
+    "depoimento": "Antes eu dependia de dinheiro trocado. Hoje com a InfinitePay, aceito qualquer valor, qualquer forma de pagamento. Minha liberdade é total!"
+  },
+  {
+    "id": "photo_29.jpg",
+    "nome": "Rosana",
+    "cidade": "Uberlândia, MG",
+    "depoimento": "A InfinitePay me ensinou que pequenos vendedores também podem ter tecnologia de ponta. Hoje me sinto incluída no mundo digital!"
+  },
+  {
+    "id": "photo_30.jpg",
+    "nome": "Leandro",
+    "cidade": "Juiz de Fora, MG",
+    "depoimento": "Minha autoestima melhorou muito com a InfinitePay. Hoje me vejo como uma empreendedora de sucesso, não apenas uma vendedora."
+  },
+  {
+    "id": "photo_31.jpg",
+    "nome": "Vanessa",
+    "cidade": "Londrina, PR",
+    "depoimento": "A InfinitePay me deu coragem para sonhar grande. Hoje planejo abrir minha loja física e sei que tenho as ferramentas certas para crescer."
+  },
+  {
+    "id": "photo_32.jpg",
+    "nome": "Bruno",
+    "cidade": "Maringá, PR",
+    "depoimento": "Com a InfinitePay, consegui profissionalizar meu atendimento. Meus clientes confiam mais em mim e indicam para os amigos. Minha rede cresceu muito!"
+  },
+  {
+    "id": "photo_33.jpg",
+    "nome": "Larissa",
+    "cidade": "Caxias do Sul, RS",
+    "depoimento": "A InfinitePay me libertou dos bancos tradicionais. Hoje tenho autonomia financeira e não dependo de gerente para nada. Sou dona do meu destino!"
+  },
+  {
+    "id": "photo_34.jpg",
+    "nome": "Diego",
+    "cidade": "Pelotas, RS",
+    "depoimento": "Minha renda mensal dobrou com a InfinitePay. Não perco mais vendas e consigo atender clientes que antes não conseguia. É uma revolução!"
+  },
+  {
+    "id": "photo_35.jpg",
+    "nome": "Priscila",
+    "cidade": "Joinville, SC",
+    "depoimento": "A InfinitePay me deu paz de espírito. Sei que meu dinheiro está seguro, sei que vou receber. Posso focar só em vender e atender bem."
+  },
+  {
+    "id": "photo_36.jpg",
+    "nome": "Wilson",
+    "cidade": "Blumenau, SC",
+    "depoimento": "Com a InfinitePay, consegui tirar minha família da dificuldade financeira. Hoje temos estabilidade e esperança no futuro."
+  },
+  {
+    "id": "photo_37.jpg",
+    "nome": "Camila",
+    "cidade": "Feira de Santana, BA",
+    "depoimento": "A InfinitePay me mostrou que é possível ter sucesso sendo honesto e trabalhador. Hoje sou exemplo para outros vendedores da região."
+  },
+  {
+    "id": "photo_38.jpg",
+    "nome": "André",
+    "cidade": "Vitória da Conquista, BA",
+    "depoimento": "Meus concorrentes ainda não descobriram a InfinitePay. Enquanto isso, eu estou na frente, oferecendo mais opções e conquistando mais clientes!"
+  },
+  {
+    "id": "photo_39.jpg",
+    "nome": "Tatiana",
+    "cidade": "Sobral, CE",
+    "depoimento": "A InfinitePay me deu credibilidade no mercado. Hoje os fornecedores me respeitam mais e consigo melhores condições de compra."
+  },
+  {
+    "id": "photo_40.jpg",
+    "nome": "Ricardo",
+    "cidade": "Juazeiro do Norte, CE",
+    "depoimento": "Com a InfinitePay, consegui organizar minha agenda financeira. Sei quando vou receber, quando vou pagar. Minha vida ficou muito mais organizada!"
+  },
+  {
+    "id": "photo_41.jpg",
+    "nome": "Gabriela",
+    "cidade": "Aparecida de Goiânia, GO",
+    "depoimento": "A InfinitePay me deu coragem para aumentar meu território de vendas. Hoje atendo toda a região e aceito pagamento em qualquer lugar!"
+  },
+  {
+    "id": "photo_42.jpg",
+    "nome": "Sérgio",
+    "cidade": "Anápolis, GO",
+    "depoimento": "Minha aposentadoria está garantida graças à InfinitePay. Consegui aumentar tanto minha renda que estou investindo para o futuro."
+  },
+  {
+    "id": "photo_43.jpg",
+    "nome": "Vera",
+    "cidade": "Imperatriz, MA",
+    "depoimento": "A InfinitePay me ensinou que tecnologia não é complicada. Hoje uso o app com facilidade e me sinto incluída na era digital."
+  },
+  {
+    "id": "photo_44.jpg",
+    "nome": "Henrique",
+    "cidade": "Dourados, MS",
+    "depoimento": "Com a InfinitePay, consegui diversificar meus produtos. Aceito qualquer pagamento, então posso vender itens mais caros sem medo."
+  },
+  {
+    "id": "photo_45.jpg",
+    "nome": "Isabela",
+    "cidade": "Rondonópolis, MT",
+    "depoimento": "A InfinitePay me deu liberdade para trabalhar onde quiser. Hoje vendo na praia, no parque, em eventos. Meu escritório é o mundo!"
+  },
+  {
+    "id": "photo_46.jpg",
+    "nome": "Paulo",
+    "cidade": "Mossoró, RN",
+    "depoimento": "Minha família toda mudou de vida com a InfinitePay. Hoje temos casa própria, carro e ainda sobra para viajar nas férias!"
+  },
+  {
+    "id": "photo_47.jpg",
+    "nome": "Denise",
+    "cidade": "Caruaru, PE",
+    "depoimento": "A InfinitePay me deu dignidade profissional. Hoje me apresento como empresária e sou respeitada pelos clientes e fornecedores."
+  },
+  {
+    "id": "photo_48.jpg",
+    "nome": "Claudio",
+    "cidade": "Petrolina, PE",
+    "depoimento": "Com a InfinitePay, consegui realizar o sonho de ter meu próprio negócio. Hoje sou patroa de mim mesma e muito feliz!"
+  },
+  {
+    "id": "photo_49.jpg",
+    "nome": "Renata",
+    "cidade": "Parnamirim, RN",
+    "depoimento": "A InfinitePay transformou minha relação com o dinheiro. Hoje sei poupar, investir e fazer meu dinheiro trabalhar para mim."
+  },
+  {
+    "id": "photo_50.jpg",
+    "nome": "Fernando",
+    "cidade": "Porto Velho, RO",
+    "depoimento": "Meus sonhos estão se realizando um por um graças à InfinitePay. Estabilidade financeira me deu coragem para sonhar ainda maior!"
+  },
+  {
+    "id": "photo_51.jpg",
+    "nome": "Marina",
+    "cidade": "Chapecó, SC",
+    "depoimento": "A InfinitePay revolucionou minha forma de trabalhar! Hoje aceito todos os tipos de pagamento e meu faturamento cresceu 200% em um ano."
+  },
+  {
+    "id": "photo_52.jpg",
+    "nome": "Roberto",
+    "cidade": "Sorocaba, SP",
+    "depoimento": "Com a InfinitePay, consegui sair das dívidas e ainda montar uma reserva de emergência. Minha vida financeira nunca esteve tão organizada!"
+  },
+  {
+    "id": "photo_53.jpg",
+    "nome": "Luciana",
+    "cidade": "São José dos Campos, SP",
+    "depoimento": "Antes perdia clientes por não aceitar cartão. Hoje com a InfinitePay, não perco nenhuma venda e ainda tenho as melhores taxas do mercado!"
+  },
+  {
+    "id": "photo_54.jpg",
+    "nome": "Carlos",
+    "cidade": "Ribeirão Preto, SP",
+    "depoimento": "A InfinitePay me deu a confiança que eu precisava para expandir meu negócio. Hoje tenho uma equipe e estamos crescendo juntos!"
+  },
+  {
+    "id": "photo_55.jpg",
+    "nome": "Ana Paula",
+    "cidade": "São José do Rio Preto, SP",
+    "depoimento": "Meu fluxo de caixa melhorou 100% com a InfinitePay. Recebo na hora e posso reinvestir imediatamente no crescimento do negócio."
+  },
+  {
+    "id": "photo_56.jpg",
+    "nome": "Jorge",
+    "cidade": "Piracicaba, SP",
+    "depoimento": "A InfinitePay me ensinou a importância da tecnologia nos negócios. Hoje sou uma vendedora digital e muito mais eficiente!"
+  },
+  {
+    "id": "photo_57.jpg",
+    "nome": "Patrícia",
+    "cidade": "Bauru, SP",
+    "depoimento": "Com a InfinitePay, consegui profissionalizar totalmente meu atendimento. Meus clientes me veem como uma empresa séria e confiável."
+  },
+  {
+    "id": "photo_58.jpg",
+    "nome": "Eduardo",
+    "cidade": "Franca, SP",
+    "depoimento": "A transparência da InfinitePay me conquistou desde o primeiro dia. Sem taxas escondidas, sem surpresas. Tudo muito claro!"
+  },
+  {
+    "id": "photo_59.jpg",
+    "nome": "Carla",
+    "cidade": "Jundiaí, SP",
+    "depoimento": "Minha produtividade triplicou com a InfinitePay! Pagamentos rápidos, sem complicação. Posso focar apenas em vender e atender bem."
+  },
+  {
+    "id": "photo_60.jpg",
+    "nome": "Marcos",
+    "cidade": "Taubaté, SP",
+    "depoimento": "A InfinitePay mudou não só meu negócio, mas minha vida toda. Hoje tenho estabilidade, crescimento e muito mais perspectivas de futuro!"
+  }
+] 

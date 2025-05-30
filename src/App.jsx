@@ -10,6 +10,8 @@ import Sidebar from "./components/Sidebar.jsx";
 import Header from "./components/Header.jsx";
 import SimpleLoader from "./components/SimpleLoader.jsx";
 import PerformanceMonitor from "./components/PerformanceMonitor.jsx";
+import AnimatedAvatar from './components/AnimatedAvatar.jsx';
+import testimonialsData from './data/testimonials.json';
 
 import {
   setLayout,
@@ -30,6 +32,11 @@ export default function App() {
     : null;
   console.log("Current selectedImageDescription:", selectedImageDescription);
 
+  // Buscar depoimento correspondente
+  const selectedTestimonial = targetImage 
+    ? testimonialsData.find(testimonial => testimonial.id === targetImage)
+    : null;
+
   // Layout buttons are removed from footer, but functionality could be added elsewhere if needed.
   // For now, direct calls to setLayout can be done programmatically or via other UI if desired.
   // Example: useEffect(() => setLayout('sphere'), []); to set initial layout.
@@ -44,16 +51,16 @@ export default function App() {
         </Suspense>
         <Sidebar />
         
-        {selectedImageDescription && (
-          <div className={c("description-panel", { visible: !!selectedImageDescription })}>
+        {selectedTestimonial && (
+          <div className={c("description-panel", { visible: !!selectedTestimonial })}>
             <div className="description-panel-header">
-              <div className="description-panel-avatar"></div>
+              <AnimatedAvatar size={32} />
               <div className="description-panel-client-info">
-                <div className="description-panel-client-name">Nome do cliente</div>
-                <div className="description-panel-client-location">cidade</div>
+                <div className="description-panel-client-name">{selectedTestimonial.nome}</div>
+                <div className="description-panel-client-location">{selectedTestimonial.cidade}</div>
               </div>
             </div>
-            <div className="description-panel-content">{selectedImageDescription}</div>
+            <div className="description-panel-content">"{selectedTestimonial.depoimento}"</div>
           </div>
         )}
 
