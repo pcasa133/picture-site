@@ -223,8 +223,8 @@ main canvas {
 
 .description-panel-header {
   display: flex;
-  align-items: center;
-  gap: 8px;
+  align-items: flex-start;
+  width: 100%;
 }
 
 .description-panel-avatar {
@@ -293,7 +293,8 @@ main canvas {
 .description-panel-client-info {
   display: flex;
   flex-direction: column;
-  gap: 2px;
+  gap: 0px;
+  width: 100%;
 }
 
 .description-panel-client-name {

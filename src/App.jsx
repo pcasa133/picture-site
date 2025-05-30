@@ -10,7 +10,6 @@ import Sidebar from "./components/Sidebar.jsx";
 import Header from "./components/Header.jsx";
 import SimpleLoader from "./components/SimpleLoader.jsx";
 import PerformanceMonitor from "./components/PerformanceMonitor.jsx";
-import AnimatedAvatar from './components/AnimatedAvatar.jsx';
 import UnicornBackground from './components/UnicornBackground.jsx';
 import testimonialsData from './data/testimonials.json';
 
@@ -67,7 +66,6 @@ export default function App() {
         {selectedTestimonial && (
           <div className={c("description-panel", { visible: !!selectedTestimonial })}>
             <div className="description-panel-header">
-              <AnimatedAvatar size={32} />
               <div className="description-panel-client-info">
                 <div className="description-panel-client-name">{selectedTestimonial.nome}</div>
                 <div className="description-panel-client-location">{selectedTestimonial.cidade}</div>
