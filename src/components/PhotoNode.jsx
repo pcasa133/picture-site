@@ -12,6 +12,7 @@ import { setTargetImage } from "../actions.js";
 const aspectRatio = 16 / 16;
 const thumbHeight = 16;
 const thumbWidth = thumbHeight * aspectRatio;
+const localImageBasePath = "/src/assets/images/";
 
 // Cache de texturas para evitar recarregamentos
 const textureCache = new Map();
